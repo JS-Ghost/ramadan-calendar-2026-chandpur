@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramadan 2026 - Chandpur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-main">
+            <div class="title-block">
+                <p class="eyebrow">Ramadan Calendar</p>
+                <h1>Ramadan 2026</h1>
+                <p class="subtitle">Chandpur, Bangladesh</p>
+            </div>
+            <div class="header-meta">
+                <div class="clock" id="liveClock">00:00:00</div>
+                <div class="badge" id="iftarBadge">Next Iftar in 00:00:00</div>
+                <button id="themeToggle" class="icon-btn ripple" aria-label="Toggle theme">
+                    <span id="themeIcon">Light</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <section class="calendar-shell">
+            <div class="calendar-panel">
+                <div class="panel-header">
+                    <div>
+                        <h2 id="monthLabel">February 2026</h2>
+                        <p class="muted">Ramadan schedule with Sehri and Iftar times</p>
+                    </div>
+                    <div class="panel-actions">
+                        <button id="todayBtn" class="chip ripple">Today</button>
+                        <button id="clearSelectionBtn" class="chip chip-ghost ripple">Clear</button>
+                    </div>
+                </div>
+
+                <div class="weekday-row">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div id="calendarGrid" class="calendar-grid"></div>
+            </div>
+
+            <aside class="detail-panel" id="detailPanel">
+                <div class="detail-header">
+                    <div>
+                        <p class="eyebrow" id="detailDay">Ramadan Day 1</p>
+                        <h3 id="detailDate">February 19, 2026</h3>
+                        <p class="muted" id="detailWeekday">Thursday</p>
+                    </div>
+                    <span class="status-pill" id="detailStatus">Upcoming</span>
+                </div>
+
+                <div class="time-stack">
+                    <div class="time-card">
+                        <p class="muted">Sehri</p>
+                        <h4 id="detailSehri">5:10 AM</h4>
+                    </div>
+                    <div class="time-card">
+                        <p class="muted">Iftar</p>
+                        <h4 id="detailIftar">5:56 PM</h4>
+                    </div>
+                </div>
+
+                <div class="countdown-box">
+                    <p class="muted" id="detailCountdownLabel">Countdown</p>
+                    <div class="countdown" id="detailCountdown">00:00:00</div>
+                </div>
+
+                <div class="progress-box">
+                    <div class="progress-header">
+                        <span>Fasting Progress</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <p class="muted" id="progressNote">Live progress available for today.</p>
+                </div>
+
+                <div class="detail-actions">
+                    <button id="prevDayBtn" class="chip chip-ghost ripple">Previous</button>
+                    <button id="nextDayBtn" class="chip ripple">Next</button>
+                </div>
+            </aside>
+        </section>
+
+        <section class="mobile-cards" id="mobileCards"></section>
+    </main>
+
+    <footer class="app-footer">
+        <p>Ramadan 2026 - Chandpur, Bangladesh</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
