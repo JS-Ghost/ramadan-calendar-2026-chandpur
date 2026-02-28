@@ -137,6 +137,11 @@ h1, h2, h3, h4 {
     transition: transform var(--transition), box-shadow var(--transition);
 }
 
+/* hide mobile-only close button by default */
+#detailCloseBtn {
+    display: none;
+}
+
 .icon-btn:hover {
     transform: translateY(-1px);
     box-shadow: var(--shadow-soft);
@@ -486,11 +491,177 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 720px) {
+    /* maintain original mobile cards but will adjust later */
     .calendar-shell {
+        /* original behavior hidden, but override in newer queries if needed */
         display: none;
     }
 
     .mobile-cards {
         display: grid;
+    }
+}
+
+/* MOBILE OPTIMIZATION */
+/* larger mobile (<=768px) adjustments */
+@media (max-width: 768px) {
+    /* stack header vertically and enlarge touch areas */
+    .header-main {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .header-meta {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+    .clock,
+    .badge,
+    #themeToggle {
+        flex: 1;
+        min-width: 0;
+        text-align: center;
+    }
+    .app-header {
+        padding: var(--gap-3) clamp(12px, 4vw, 24px);
+    }
+    /* calendar panel should expand full width and allow horizontal scroll */
+    .calendar-shell {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--gap-3);
+    }
+    /* hide the alternate mobile list when calendar is visible */
+    .mobile-cards {
+        display: none;
+    }
+    .calendar-panel {
+        width: 100%;
+        overflow-x: auto;
+    }
+    .calendar-panel::-webkit-scrollbar {
+        height: 6px;
+    }
+    .calendar-panel::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 3px;
+    }
+    .calendar-grid {
+        min-width: 560px; /* allow scroll when too many columns */
+        gap: 4px;
+    }
+    .calendar-cell {
+        padding: 8px;
+        min-height: 80px;
+    }
+    .month-navigation .chip {
+        min-width: 100px;
+        padding: 12px 0;
+        font-size: 0.9rem;
+    }
+    .month-navigation.bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: var(--gap-2) 0;
+        justify-content: space-around;
+        background: var(--surface-strong);
+        border-top: 1px solid var(--border);
+    }
+    .panel-actions {
+        width: 100%;
+        justify-content: space-around;
+    }
+    .chip,
+    .icon-btn {
+        padding: 12px 20px;
+        min-height: 44px;
+        font-size: 1rem;
+    }
+    /* detail panel bottom sheet behavior */
+    .detail-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-height: 85%;
+        transform: translateY(100%);
+        transition: transform var(--transition) ease;
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        z-index: 20;
+        overflow-y: auto;
+        box-shadow: var(--shadow-soft);
+    }
+    .detail-panel.open {
+        transform: translateY(0);
+    }
+    #detailCloseBtn {
+        display: inline-flex;
+    }
+    /* header close button aligned right */
+    .detail-header {
+        position: relative;
+    }
+    .close-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 8px;
+        font-size: 1rem;
+    }
+    /* enlarge text for readability */
+    .detail-day,
+    .detailDate,
+    .detailWeekday,
+    .countdown,
+    .time-card h4 {
+        font-size: clamp(1rem, 4vw, 1.4rem);
+    }
+    .progress-box .progress-header {
+        font-size: 0.95rem;
+    }
+}
+
+/* very small screens (<=480px) */
+@media (max-width: 480px) {
+    .app-header {
+        padding: var(--gap-2) clamp(8px, 4vw, 16px);
+    }
+    .title-block h1 {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+    }
+    .subtitle,
+    .muted,
+    .eyebrow {
+        font-size: 0.85rem;
+    }
+    .calendar-grid {
+        min-width: 480px;
+    }
+    .ramadan-pill {
+        font-size: 0.75rem;
+        padding: 4px;
+    }
+    .month-navigation h2 {
+        min-width: 140px;
+    }
+    /* make bottom nav buttons larger and accessible */
+    .month-navigation.bottom .chip {
+        flex: 1;
+        margin: 0 4px;
+    }
+    /* reduce heavy shadows on mobile */
+    .calendar-cell,
+    .time-card,
+    .detail-panel,
+    .mobile-card {
+        box-shadow: none;
+        border: 1px solid var(--border);
+    }
+    .clock,
+    .badge {
+        font-size: 0.9rem;
+        padding: 8px 12px;
     }
 }

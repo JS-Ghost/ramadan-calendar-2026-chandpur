@@ -120,6 +120,8 @@ const detailCountdown = document.getElementById("detailCountdown");
 const progressFill = document.getElementById("progressFill");
 const progressPercent = document.getElementById("progressPercent");
 const progressNote = document.getElementById("progressNote");
+const detailPanel = document.getElementById("detailPanel");
+const detailCloseBtn = document.getElementById("detailCloseBtn");
 
 function init() {
     // Initialize current month/year from constants
@@ -278,7 +280,21 @@ function selectDate(iso) {
     localStorage.setItem("selectedDate", iso);
     renderCalendar();
     updateDetailPanel();
+    // show bottom sheet on narrow screens
+    if (window.innerWidth <= 768 && detailPanel) {
+        showDetailPanel();
+    }
 }
+
+/* MOBILE OPTIMIZATION: detail panel helpers */
+function showDetailPanel() {
+    if (!detailPanel) return;
+    detailPanel.classList.add('open');
+}
+function hideDetailPanel() {
+    if (!detailPanel) return;
+    detailPanel.classList.remove('open');
+} 
 
 function updateDetailPanel() {
     const info = getRamadanInfo(state.selectedDate);
@@ -554,6 +570,19 @@ function bindEvents() {
     document.querySelectorAll(".ripple").forEach((button) => {
         button.addEventListener("click", createRipple);
     });
+
+    // close button for mobile detail panel
+    if (detailCloseBtn) {
+        detailCloseBtn.addEventListener('click', hideDetailPanel);
+    }
+    // also hide panel when tapping outside on narrow screens
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 && detailPanel && detailPanel.classList.contains('open')) {
+            if (!detailPanel.contains(e.target) && !e.target.closest('.calendar-cell') && !e.target.closest('.mobile-card')) {
+                hideDetailPanel();
+            }
+        }
+    });
 }
 
 function createRipple(event) {
@@ -571,5 +600,11 @@ function createRipple(event) {
     if (existing) existing.remove();
     button.appendChild(circle);
 }
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && detailPanel) {
+        hideDetailPanel();
+    }
+});
 
 document.addEventListener("DOMContentLoaded", init);
