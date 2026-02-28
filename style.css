@@ -491,16 +491,24 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 720px) {
-    /* maintain original mobile cards but will adjust later */
-    .calendar-shell {
-        /* original behavior hidden, but override in newer queries if needed */
+    /* legacy rule removed: calendar remains visible at all small breakpoints
+       we prefer the enhanced responsive grid and bottom sheet detail panel.
+       mobile-cards are no longer used. */
+    .mobile-cards {
         display: none;
     }
-
-    .mobile-cards {
-        display: grid;
-    }
 }
+
+/* make sure long texts/numbers wrap inside cells and cards */
+.calendar-cell,
+.ramadan-pill,
+.time-card,
+.mobile-card {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
 
 /* MOBILE OPTIMIZATION */
 /* larger mobile (<=768px) adjustments */
@@ -559,6 +567,13 @@ h1, h2, h3, h4 {
         padding: 12px 0;
         font-size: 0.9rem;
     }
+    .month-navigation h2 {
+        white-space: normal;
+        font-size: clamp(1rem, 4vw, 1.2rem);
+    }
+    .countdown {
+        word-break: break-word;
+    }
     .month-navigation.bottom {
         position: fixed;
         bottom: 0;
@@ -592,6 +607,7 @@ h1, h2, h3, h4 {
         z-index: 20;
         overflow-y: auto;
         box-shadow: var(--shadow-soft);
+        padding-bottom: 60px; /* ensure content not hidden under bottom navigation */
     }
     .detail-panel.open {
         transform: translateY(0);
