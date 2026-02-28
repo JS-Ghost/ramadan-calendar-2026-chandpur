@@ -513,6 +513,11 @@ h1, h2, h3, h4 {
 /* MOBILE OPTIMIZATION */
 /* larger mobile (<=768px) adjustments */
 @media (max-width: 768px) {
+    /* MOBILE HORIZONTAL SCROLL FIX */
+    html, body {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
     /* stack header vertically and enlarge touch areas */
     .header-main {
         flex-direction: column;
@@ -521,7 +526,7 @@ h1, h2, h3, h4 {
     .header-meta {
         width: 100%;
         justify-content: space-between;
-        flex-wrap: nowrap;
+        flex-wrap: wrap; /* MOBILE HORIZONTAL SCROLL FIX */
     }
     .clock,
     .badge,
@@ -545,7 +550,7 @@ h1, h2, h3, h4 {
     }
     .calendar-panel {
         width: 100%;
-        overflow-x: auto;
+        overflow-x: hidden; /* MOBILE HORIZONTAL SCROLL FIX */
     }
     .calendar-panel::-webkit-scrollbar {
         height: 6px;
@@ -555,8 +560,9 @@ h1, h2, h3, h4 {
         border-radius: 3px;
     }
     .calendar-grid {
-        min-width: 560px; /* allow scroll when too many columns */
+        min-width: 0; /* MOBILE HORIZONTAL SCROLL FIX: reset large min-width */
         gap: 4px;
+        width: 100%; /* MOBILE HORIZONTAL SCROLL FIX */
     }
     .calendar-cell {
         padding: 8px;
@@ -570,6 +576,7 @@ h1, h2, h3, h4 {
     .month-navigation h2 {
         white-space: normal;
         font-size: clamp(1rem, 4vw, 1.2rem);
+        min-width: 0; /* MOBILE HORIZONTAL SCROLL FIX */
     }
     .countdown {
         word-break: break-word;
@@ -672,6 +679,9 @@ h1, h2, h3, h4 {
 
 /* very small screens (<=480px) */
 @media (max-width: 480px) {
+    /* MOBILE HORIZONTAL SCROLL FIX */
+    html, body { overflow-x: hidden; }
+
     .app-header {
         padding: var(--gap-2) clamp(8px, 4vw, 16px);
     }
@@ -684,14 +694,14 @@ h1, h2, h3, h4 {
         font-size: 0.85rem;
     }
     .calendar-grid {
-        min-width: 480px;
+        min-width: 0; /* MOBILE HORIZONTAL SCROLL FIX */
     }
     .ramadan-pill {
         font-size: 0.75rem;
         padding: 4px;
     }
     .month-navigation h2 {
-        min-width: 140px;
+        min-width: 0; /* MOBILE HORIZONTAL SCROLL FIX */
     }
     /* make bottom nav buttons larger and accessible */
     .month-navigation.bottom .chip {
