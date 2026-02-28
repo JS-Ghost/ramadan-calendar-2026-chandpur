@@ -21,7 +21,7 @@
                 <div class="clock" id="liveClock">00:00:00</div>
                 <div class="badge" id="iftarBadge">Next Iftar in 00:00:00</div>
                 <button id="themeToggle" class="icon-btn ripple" aria-label="Toggle theme">
-                    <span id="themeIcon">Light</span>
+                    <span id="themeIcon" class="theme-icon">🌙</span>
                 </button>
             </div>
         </div>
@@ -32,7 +32,11 @@
             <div class="calendar-panel">
                 <div class="panel-header">
                     <div>
-                        <h2 id="monthLabel">February 2026</h2>
+                        <div class="month-navigation">
+                            <button id="prevMonthBtn" class="chip chip-ghost ripple">← Previous</button>
+                            <h2 id="monthLabel">February 2026</h2>
+                            <button id="nextMonthBtn" class="chip chip-ghost ripple">Next →</button>
+                        </div>
                         <p class="muted">Ramadan schedule with Sehri and Iftar times</p>
                     </div>
                     <div class="panel-actions">
@@ -51,6 +55,12 @@
                     <div>Sat</div>
                 </div>
                 <div id="calendarGrid" class="calendar-grid"></div>
+
+                <!-- bottom month navigation for easier access after scrolling -->
+                <div class="month-navigation bottom">
+                    <button id="prevMonthBtnBottom" class="chip chip-ghost ripple">← Previous</button>
+                    <button id="nextMonthBtnBottom" class="chip chip-ghost ripple">Next →</button>
+                </div>
             </div>
 
             <aside class="detail-panel" id="detailPanel">
@@ -85,7 +95,7 @@
                         <span id="progressPercent">0%</span>
                     </div>
                     <div class="progress-track">
-                        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+                        <div id="progressFill" class="progress-fill"></div>
                     </div>
                     <p class="muted" id="progressNote">Live progress available for today.</p>
                 </div>

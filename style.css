@@ -1,7 +1,7 @@
 :root {
     --primary: #1f4b34;
     --accent: #c8a951;
-    --bg: #f5f6f8;
+    --bg: #e8f4ed;
     --surface: rgba(255, 255, 255, 0.8);
     --surface-strong: #ffffff;
     --text: #162019;
@@ -20,7 +20,7 @@
 }
 
 body.dark {
-    --bg: #0f1412;
+    --bg: #0a1f14;
     --surface: rgba(20, 26, 22, 0.84);
     --surface-strong: #151b18;
     --text: #eef1ee;
@@ -49,9 +49,8 @@ body::before {
     position: fixed;
     inset: 0;
     background:
-        radial-gradient(circle at 15% 20%, rgba(200, 169, 81, 0.18), transparent 45%),
-        radial-gradient(circle at 85% 25%, rgba(31, 75, 52, 0.16), transparent 40%),
-        radial-gradient(circle at 40% 85%, rgba(200, 169, 81, 0.15), transparent 45%);
+        radial-gradient(circle at 15% 20%, rgba(31, 75, 52, 0.2), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(31, 75, 52, 0.15), transparent 50%);
     z-index: -2;
 }
 
@@ -143,6 +142,16 @@ h1, h2, h3, h4 {
     box-shadow: var(--shadow-soft);
 }
 
+.theme-icon {
+    font-size: 1.5rem;
+    display: inline-block;
+    transition: transform 300ms ease;
+}
+
+.theme-icon:hover {
+    transform: rotate(20deg);
+}
+
 .app-main {
     padding: 0 clamp(20px, 4vw, 48px) var(--gap-4);
     animation: fadeIn 0.4s ease;
@@ -183,6 +192,33 @@ h1, h2, h3, h4 {
     display: flex;
     gap: var(--gap-1);
     flex-wrap: wrap;
+}
+
+.month-navigation {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-2);
+    justify-content: center;
+}
+
+/* bottom navigation replica that sticks to bottom of calendar panel */
+.month-navigation.bottom {
+    justify-content: space-between;
+    margin-top: var(--gap-3);
+    position: sticky;
+    bottom: 0;
+    background: var(--surface);
+    padding: var(--gap-2) 0;
+    z-index: 10;
+}
+
+.month-navigation h2 {
+    min-width: 180px;
+    text-align: center;
+}
+
+.month-navigation .chip {
+    min-width: 110px;
 }
 
 .weekday-row {
@@ -259,16 +295,26 @@ h1, h2, h3, h4 {
     margin-top: 10px;
     padding: 8px;
     border-radius: 12px;
-    background: rgba(31, 75, 52, 0.1);
-    border: 1px solid rgba(31, 75, 52, 0.18);
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
     display: grid;
     gap: 4px;
     font-size: 0.82rem;
+    color: var(--text);
 }
 
 .ramadan-pill strong {
     font-size: 0.85rem;
 }
+
+/* decade highlights for calendar cells and mobile cards */
+.calendar-cell.first-decade { background: rgba(200, 169, 81, 0.35); }
+.calendar-cell.middle-decade { background: rgba(31, 75, 52, 0.3); }
+.calendar-cell.last-decade { background: rgba(119, 38, 64, 0.3); }
+
+.mobile-card.first-decade { border-left: 4px solid rgba(200, 169, 81, 1); }
+.mobile-card.middle-decade { border-left: 4px solid rgba(31, 75, 52, 1); }
+.mobile-card.last-decade { border-left: 4px solid rgba(119, 38, 64, 1); }
 
 .detail-panel {
     display: grid;
@@ -286,7 +332,7 @@ h1, h2, h3, h4 {
     padding: 6px 12px;
     border-radius: 999px;
     background: rgba(200, 169, 81, 0.18);
-    color: var(--primary);
+    color: var(--text);
     font-weight: 600;
     font-size: 0.85rem;
 }
@@ -313,7 +359,8 @@ h1, h2, h3, h4 {
 .countdown-box {
     padding: var(--gap-2);
     border-radius: var(--radius-md);
-    background: rgba(31, 75, 52, 0.1);
+    background: var(--surface);
+    border: 1px solid var(--border);
 }
 
 .countdown {
@@ -336,7 +383,7 @@ h1, h2, h3, h4 {
 .progress-track {
     width: 100%;
     height: 10px;
-    background: rgba(31, 75, 52, 0.1);
+    background: var(--border);
     border-radius: 999px;
     overflow: hidden;
 }
@@ -344,9 +391,11 @@ h1, h2, h3, h4 {
 .progress-fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, rgba(31, 75, 52, 0.85), rgba(200, 169, 81, 0.9));
+    background: linear-gradient(90deg, #ef4444 0%, #f97316 25%, #eab308 50%, #84cc16 75%, #22c55e 100%);
     transition: width 0.5s ease;
+    position: relative;
 }
+
 
 .detail-actions {
     display: flex;
@@ -359,6 +408,7 @@ h1, h2, h3, h4 {
     border-radius: 999px;
     border: 1px solid var(--border);
     background: var(--surface);
+    color: var(--text);
     cursor: pointer;
     font-weight: 600;
     transition: transform var(--transition), box-shadow var(--transition);
