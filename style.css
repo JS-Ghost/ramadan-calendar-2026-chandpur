@@ -637,6 +637,37 @@ h1, h2, h3, h4 {
     .progress-box .progress-header {
         font-size: 0.95rem;
     }
+
+    /* MOBILE OVERFLOW FIX */
+    /* ensure calendar grid collapses into two columns and cards wrap cleanly */
+    .calendar-grid {
+        grid-template-columns: repeat(2, 1fr); /* MOBILE OVERFLOW FIX */
+        gap: var(--gap-2); /* MOBILE OVERFLOW FIX */
+        min-width: 0; /* MOBILE OVERFLOW FIX: prevent forced horizontal scrolling */
+    }
+    .calendar-cell {
+        padding: 6px; /* MOBILE OVERFLOW FIX: reduce internal padding */
+        min-height: auto; /* MOBILE OVERFLOW FIX: allow flexible height */
+        overflow: hidden; /* MOBILE OVERFLOW FIX */
+        word-wrap: break-word; /* MOBILE OVERFLOW FIX */
+        overflow-wrap: break-word; /* MOBILE OVERFLOW FIX */
+        box-sizing: border-box; /* MOBILE OVERFLOW FIX */
+        max-width: 100%; /* MOBILE OVERFLOW FIX */
+    }
+    .date-number {
+        font-size: clamp(0.9rem, 2.5vw, 1rem); /* MOBILE OVERFLOW FIX */
+    }
+    .ramadan-pill {
+        font-size: clamp(0.7rem, 2.5vw, 0.85rem); /* MOBILE OVERFLOW FIX */
+        padding: 6px; /* MOBILE OVERFLOW FIX */
+    }
+    .ramadan-pill strong {
+        font-size: clamp(0.8rem, 2.8vw, 1rem); /* MOBILE OVERFLOW FIX */
+    }
+    .ramadan-pill span {
+        font-size: clamp(0.7rem, 2.2vw, 0.9rem); /* MOBILE OVERFLOW FIX */
+        line-height: 1.2; /* MOBILE OVERFLOW FIX */
+    }
 }
 
 /* very small screens (<=480px) */
